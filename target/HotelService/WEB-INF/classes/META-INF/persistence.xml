@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+			 version="2.1">
+	
+	<persistence-unit transaction-type="RESOURCE_LOCAL" name="hotel">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>br.com.hotel.model.Hospede</class>
+		<class>br.com.hotel.model.CheckIn</class>
+		
+		<properties>
+			<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/hotel"/>
+			<property name="hibernate.connection.username" value="postgres"/>
+			<property name="hibernate.connection.password" value="gpgadmin2019"/> -->
+			
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="postgres://hijwiezqaqhvqt:f09ad31022be89e03ef77b24e6fcde0cecbb35c665536d8b781ffbe1b8daea26@ec2-50-17-227-28.compute-1.amazonaws.com:5432/deeg61fcomaf7h"/>
+			<property name="hibernate.connection.username" value="hijwiezqaqhvqt"/>
+			<property name="hibernate.connection.password" value="f09ad31022be89e03ef77b24e6fcde0cecbb35c665536d8b781ffbe1b8daea26"/>
+					
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	
+</persistence>
