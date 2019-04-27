@@ -1,14 +1,14 @@
-package br.com.hotel.ws.rest.response;
+package br.com.hotel.ws.rest.request;
 
 import java.util.Date;
 
-public class CheckInResponse extends DefaultResponse {
+public class CheckInRequest {
 	
 	private Long id;
 	private Date dataEntrada;
 	private Date dataSaida;
 	private Boolean adicionalVeiculo;
-	private String hospede;
+	private HospedeRequest hospede;
 	
 	public Long getId() {
 		return id;
@@ -41,12 +41,12 @@ public class CheckInResponse extends DefaultResponse {
 	public void setAdicionalVeiculo(Boolean adicionalVeiculo) {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
-	
-	public String getHospede() {
+
+	public HospedeRequest getHospede() {
 		return hospede;
 	}
 
-	public void setHospede(String hospede) {
+	public void setHospede(HospedeRequest hospede) {
 		this.hospede = hospede;
 	}
 	

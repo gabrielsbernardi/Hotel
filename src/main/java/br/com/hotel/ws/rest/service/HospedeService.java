@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import br.com.hotel.ws.controller.HospedeController;
+import br.com.hotel.ws.rest.request.HospedeFilterRequest;
 import br.com.hotel.ws.rest.request.HospedeRequest;
 import br.com.hotel.ws.rest.response.HospedeResponse;
 
@@ -37,7 +38,7 @@ public class HospedeService {
 	@Path("/getHospedes")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<HospedeResponse> getHospedes(HospedeRequest request) throws Exception {
+	public List<HospedeResponse> getHospedes(HospedeFilterRequest request) throws Exception {
 		HospedeController hc = new HospedeController();
 		return hc.getHospedes(request);
 	}

@@ -12,6 +12,8 @@ import org.hibernate.exception.ConstraintViolationException;
 import br.com.hotel.data.ConnectionDB;
 import br.com.hotel.model.CheckIn;
 import br.com.hotel.model.Hospede;
+import br.com.hotel.utils.Utils;
+import br.com.hotel.ws.rest.request.HospedeFilterRequest;
 import br.com.hotel.ws.rest.request.HospedeRequest;
 import br.com.hotel.ws.rest.response.HospedeResponse;
 
@@ -21,12 +23,12 @@ public class HospedeController {
 	private EntityManager manager;
 
 	public HospedeController() {
-		manager = ConnectionDB.getEntityManager();
+		this.manager = ConnectionDB.getEntityManager();
 	}
 	
 	/**
 	 * 
-	 * Inserção e atualização de Hospede
+	 * Inserção e atualização de Hóspede
 	 * 
 	 * @param request
 	 * @return
@@ -56,6 +58,13 @@ public class HospedeController {
 		return response;
 	}
 	
+	/**
+	 * 
+	 * Exclusão de Hóspede
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public HospedeResponse deleteHospede(Long id) {
 		HospedeResponse response = new HospedeResponse();
 		try {
@@ -77,15 +86,15 @@ public class HospedeController {
 					}
 					
 					for (CheckIn c : hospede.getCheckins()) {
-						manager.getTransaction().begin();
-						manager.remove(c);
-						manager.getTransaction().commit();
+						this.manager.getTransaction().begin();
+						this.manager.remove(c);
+						this.manager.getTransaction().commit();
 					}
 				}
 				
-				manager.getTransaction().begin();
-				manager.remove(hospede);
-				manager.getTransaction().commit();
+				this.manager.getTransaction().begin();
+				this.manager.remove(hospede);
+				this.manager.getTransaction().commit();
 				
 				response.setIsSucess(Boolean.TRUE);
 				response.setMessage("Hóspede excluído com sucesso!");
@@ -100,15 +109,30 @@ public class HospedeController {
 		return response;
 	}
 	
-	public List<HospedeResponse> getHospedes(HospedeRequest request) {
+	/**
+	 * 
+	 * Consulta de Hóspedes
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public List<HospedeResponse> getHospedes(HospedeFilterRequest request) {
 		
 		StringJoiner sql = new StringJoiner("\n");
-		sql
-		.add(" SELECT * 		  ")
-		.add(" FROM \"hospede\" h ")
-		.add(" ORDER BY h.nome 	  ");
+		sql.add(" SELECT * FROM \"hospede\" h ");
+		
+		if (!Utils.stringIsNull(request.getNomeDocTel())) {
+			sql.add(" WHERE (UPPER(h.nome) LIKE UPPER('%:pNomeDocTel%') ");
+			sql.add(" 		 OR h.documento LIKE '%:pNomeDocTel%' 		");
+			sql.add(" 		 OR h.telefone LIKE '%:pNomeDocTel%') 		");
+		}
+		
+		sql.add(" ORDER BY h.nome 	  ");
 		
 		Query query = this.manager.createNativeQuery(sql.toString());
+		
+		if (!Utils.stringIsNull(request.getNomeDocTel()))
+			query.setParameter("pNomeDocTel", request.getNomeDocTel());
 		
 		@SuppressWarnings("unchecked")
 		List<Object[]> results = query.getResultList();
