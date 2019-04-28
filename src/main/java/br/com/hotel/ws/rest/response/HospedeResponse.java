@@ -4,11 +4,20 @@ import java.util.List;
 
 public class HospedeResponse extends DefaultResponse {
 	
+	private Long id;
 	private String nome;
 	private String documento;
 	private String telefone;
 	private List<CheckInResponse> checkins;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

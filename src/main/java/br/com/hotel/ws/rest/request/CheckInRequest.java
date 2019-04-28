@@ -8,8 +8,9 @@ public class CheckInRequest {
 	private Date dataEntrada;
 	private Date dataSaida;
 	private Boolean adicionalVeiculo;
-	private HospedeRequest hospede;
-	
+	private Long hospedeId;
+	private Boolean somenteAbertoFilter;
+
 	public Long getId() {
 		return id;
 	}
@@ -42,12 +43,20 @@ public class CheckInRequest {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
 
-	public HospedeRequest getHospede() {
-		return hospede;
+	public Long getHospedeId() {
+		return hospedeId;
 	}
 
-	public void setHospede(HospedeRequest hospede) {
-		this.hospede = hospede;
+	public void setHospedeId(Long hospedeId) {
+		this.hospedeId = hospedeId;
+	}
+
+	public Boolean getSomenteAbertoFilter() {
+		return somenteAbertoFilter;
+	}
+
+	public void setSomenteAbertoFilter(Boolean somenteAbertoFilter) {
+		this.somenteAbertoFilter = somenteAbertoFilter;
 	}
 	
 }

@@ -25,10 +25,10 @@ public class CheckInService {
 	}
 	
 	@POST
-	@Path("/getCheckIns")
+	@Path("/getCheckins")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<CheckInResponse> getCheckIns(CheckInRequest request) throws Exception {
+	public List<CheckInResponse> getCheckins(CheckInRequest request) throws Exception {
 		CheckInController cc = new CheckInController();
 		return cc.getCheckIns(request);
 	}

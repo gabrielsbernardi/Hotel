@@ -16,10 +16,10 @@ public class CheckIn {
 	@Column(name = "data_entrada", nullable = false)
 	private Date dataEntrada;
 	
-	@Column(name = "data_saida", nullable = false)
+	@Column(name = "data_saida", nullable = true)
 	private Date dataSaida;
 	
-	@Column(name = "adicional_veiculo", nullable = true)
+	@Column(name = "adicional_veiculo", nullable = false)
 	private Boolean adicionalVeiculo;
 	
 	@ManyToOne

@@ -4,18 +4,27 @@ import java.util.Date;
 
 public class CheckInResponse extends DefaultResponse {
 	
-	private Long id;
+	private String nome;
+	private String documento;
 	private Date dataEntrada;
 	private Date dataSaida;
 	private Boolean adicionalVeiculo;
-	private String hospede;
+	private Double valorGasto;
 	
-	public Long getId() {
-		return id;
+	public String getNome() {
+		return nome;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getDocumento() {
+		return documento;
+	}
+	
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 	
 	public Date getDataEntrada() {
@@ -37,17 +46,17 @@ public class CheckInResponse extends DefaultResponse {
 	public Boolean getAdicionalVeiculo() {
 		return adicionalVeiculo;
 	}
-	
+
 	public void setAdicionalVeiculo(Boolean adicionalVeiculo) {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
-	
-	public String getHospede() {
-		return hospede;
-	}
 
-	public void setHospede(String hospede) {
-		this.hospede = hospede;
+	public Double getValorGasto() {
+		return valorGasto;
+	}
+	
+	public void setValorGasto(Double valorGasto) {
+		this.valorGasto = valorGasto;
 	}
 	
 }

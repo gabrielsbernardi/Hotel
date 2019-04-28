@@ -6,6 +6,7 @@ public class HospedeRequest {
 	private String nome;
 	private String documento;
 	private String telefone;
+	private String nomDocTelFilter;
 
 	public Long getId() {
 		return id;
@@ -37,6 +38,14 @@ public class HospedeRequest {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getNomDocTelFilter() {
+		return nomDocTelFilter;
+	}
+
+	public void setNomDocTelFilter(String nomDocTelFilter) {
+		this.nomDocTelFilter = nomDocTelFilter;
 	}
 	
 }

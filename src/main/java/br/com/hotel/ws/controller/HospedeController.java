@@ -7,13 +7,10 @@ import java.util.function.Predicate;
 
 import javax.persistence.*;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 import br.com.hotel.data.ConnectionDB;
 import br.com.hotel.model.CheckIn;
 import br.com.hotel.model.Hospede;
 import br.com.hotel.utils.Utils;
-import br.com.hotel.ws.rest.request.HospedeFilterRequest;
 import br.com.hotel.ws.rest.request.HospedeRequest;
 import br.com.hotel.ws.rest.response.HospedeResponse;
 
@@ -32,8 +29,9 @@ public class HospedeController {
 	 * 
 	 * @param request
 	 * @return
+	 * @throws Exception 
 	 */
-	public HospedeResponse insertUpdateHospede(HospedeRequest request) {
+	public HospedeResponse insertUpdateHospede(HospedeRequest request) throws Exception {
 		HospedeResponse response = new HospedeResponse();
 		try {
 			Hospede hospede = new Hospede();
@@ -48,12 +46,15 @@ public class HospedeController {
 			
 			response.setIsSucess(Boolean.TRUE);
 			response.setMessage(request.getId() == null ? "Hóspede incluido com sucesso!" : "Hóspede atualizado com sucesso!");
-		} catch (ConstraintViolationException e) {
-			response.setIsSucess(Boolean.FALSE);
-			response.setMessage("Hóspede já cadasttrado!");
 		} catch (Exception e) {
-			response.setIsSucess(Boolean.FALSE);
-			response.setMessage("Erro: " + e.getMessage());
+			if (e.getMessage().contains("ConstraintViolationException")) {
+				response.setIsSucess(Boolean.FALSE);
+				response.setMessage("Hóspede já cadasttrado!");
+			} else {
+				response.setIsSucess(Boolean.FALSE);
+				response.setMessage("Erro: " + e.getMessage());
+			}
+			this.manager.getTransaction().rollback();
 		} 
 		return response;
 	}
@@ -101,10 +102,12 @@ public class HospedeController {
 			} else {
 				response.setIsSucess(Boolean.FALSE);
 				response.setMessage("Hóspede inexistente!");
+				this.manager.getTransaction().rollback();
 			}
 		} catch (Exception e) {
 			response.setIsSucess(Boolean.FALSE);
 			response.setMessage(e.getMessage());
+			this.manager.getTransaction().rollback();
 		}
 		return response;
 	}
@@ -116,37 +119,46 @@ public class HospedeController {
 	 * @param request
 	 * @return
 	 */
-	public List<HospedeResponse> getHospedes(HospedeFilterRequest request) {
-		
-		StringJoiner sql = new StringJoiner("\n");
-		sql.add(" SELECT * FROM \"hospede\" h ");
-		
-		if (!Utils.stringIsNull(request.getNomeDocTel())) {
-			sql.add(" WHERE (UPPER(h.nome) LIKE UPPER('%:pNomeDocTel%') ");
-			sql.add(" 		 OR h.documento LIKE '%:pNomeDocTel%' 		");
-			sql.add(" 		 OR h.telefone LIKE '%:pNomeDocTel%') 		");
-		}
-		
-		sql.add(" ORDER BY h.nome 	  ");
-		
-		Query query = this.manager.createNativeQuery(sql.toString());
-		
-		if (!Utils.stringIsNull(request.getNomeDocTel()))
-			query.setParameter("pNomeDocTel", request.getNomeDocTel());
-		
-		@SuppressWarnings("unchecked")
-		List<Object[]> results = query.getResultList();
-		
-		HospedeResponse h = null;
+	public List<HospedeResponse> getHospedes(HospedeRequest request) {
 		List<HospedeResponse> list = new ArrayList<HospedeResponse>();
+		HospedeResponse h = null;
 		
-		for (Object[] o : results) {
-			h = new HospedeResponse();
-			h.setNome((String) o[0]);
-			h.setDocumento((String) o[1]);
-			h.setTelefone((String) o[2]);
+		try {
+			StringJoiner sql = new StringJoiner("\n");
+			sql
+			.add(" SELECT h.id,           ")
+			.add("        h.nome,    	  ")
+			.add("        h.documento     ")
+			.add(" FROM \"hospede\" h 	  ");
 			
+			if (!Utils.stringIsNull(request.getNomDocTelFilter())) {
+				sql.add(" WHERE (UPPER(h.nome) LIKE UPPER('%" + request.getNomDocTelFilter() + "%')  ");
+				sql.add(" 		 OR h.documento LIKE '%" + request.getNomDocTelFilter() + "%' 	    ");
+				sql.add(" 		 OR h.telefone LIKE '%" + request.getNomDocTelFilter() + "%') 	    ");
+			}
+			
+			sql.add(" ORDER BY h.nome 	  ");
+			
+			Query query = this.manager.createNativeQuery(sql.toString());
+			
+			@SuppressWarnings("unchecked")
+			List<Object[]> results = query.getResultList();
+			for (Object[] o : results) {
+				h = new HospedeResponse();
+				h.setId(((Integer) o[0]).longValue());
+				h.setNome((String) o[1]);
+				h.setDocumento((String) o[2]);
+				
+				list.add(h);
+			}
+			h.setIsSucess(Boolean.TRUE);
+		} catch (Exception e) {
+			list = new ArrayList<HospedeResponse>();
+			h = new HospedeResponse();
+			h.setIsSucess(Boolean.FALSE);
+			h.setMessage(e.getMessage());
 			list.add(h);
+			this.manager.getTransaction().rollback();
 		}
 		
 		return list;
