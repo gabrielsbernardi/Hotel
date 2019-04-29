@@ -20,8 +20,12 @@ public class HospedeService {
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public HospedeResponse insertUpdateHospede(HospedeRequest request) throws Exception {
-		HospedeController hc = new HospedeController();
-		return hc.insertUpdateHospede(request);
+//		HospedeController hc = new HospedeController();
+//		return hc.insertUpdateHospede(request);
+		HospedeResponse h = new HospedeResponse();
+		h.setIsSucess(true);
+		h.setMessage("Chamou");
+		return h;
 	}
 	
 	@POST
