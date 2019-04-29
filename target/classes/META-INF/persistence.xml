@@ -4,21 +4,21 @@
 			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 			 version="2.1">
 	
-	<persistence-unit transaction-type="RESOURCE_LOCAL" name="hotel">
+	<persistence-unit transaction-type="RESOURCE_LOCAL" name="public">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>br.com.hotel.model.Hospede</class>
 		<class>br.com.hotel.model.CheckIn</class>
 		
 		<properties>
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/hotel"/>
 			<property name="hibernate.connection.username" value="postgres"/>
-			<property name="hibernate.connection.password" value="gpgadmin2019"/>
+			<property name="hibernate.connection.password" value="gpgadmin2019"/>  -->
 			
-			<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-			<property name="hibernate.connection.url" value="postgres://gzuzldmaujzzyv:f2b72495a1970e69cfd1a5697b54b9cd40d72d3ca0e2609e2a2fab1cf6683485@ec2-54-83-205-27.compute-1.amazonaws.com:5432/dfe5sfvqtkqjbo"/>
-			<property name="hibernate.connection.username" value="gzuzldmaujzzyv"/>
-			<property name="hibernate.connection.password" value="f2b72495a1970e69cfd1a5697b54b9cd40d72d3ca0e2609e2a2fab1cf6683485"/> -->
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="postgres://oypyegqqqqdbzo:fc68e18a13f3ee7b788230783f022ce5b0e7460449a1a7021f67bcbb19ab5190@ec2-54-225-116-36.compute-1.amazonaws.com:5432/d32ofij031tvkm"/>
+			<property name="hibernate.connection.username" value="oypyegqqqqdbzo"/>
+			<property name="hibernate.connection.password" value="fc68e18a13f3ee7b788230783f022ce5b0e7460449a1a7021f67bcbb19ab5190"/>
 					
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
