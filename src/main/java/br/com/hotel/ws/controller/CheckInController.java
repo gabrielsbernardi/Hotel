@@ -17,6 +17,7 @@ import br.com.hotel.model.Hospede;
 import br.com.hotel.utils.Utils;
 import br.com.hotel.ws.rest.request.CheckInRequest;
 import br.com.hotel.ws.rest.response.CheckInResponse;
+import br.com.hotel.ws.rest.response.HospedeResponse;
 
 public class CheckInController {
 	
@@ -78,21 +79,42 @@ public class CheckInController {
 			checkIn.setDataSaida(request.getDataSaida());
 			checkIn.setAdicionalVeiculo(request.getAdicionalVeiculo());
 			
-			Hospede h = this.manager.find(Hospede.class, request.getHospedeId());
-			checkIn.setHospede(h);
-			
-			this.manager.getTransaction().begin();
-			this.manager.merge(checkIn);
-			this.manager.getTransaction().commit();
-			
-			response.setIsSucess(Boolean.TRUE);
-			response.setMessage(request.getId() == null ? "CheckIn realizado com sucesso!" : "CheckIn atualizado com sucesso!");
+			Hospede h = this.manager.find(Hospede.class, this.geHospedeByDoc(request.getHospedeDoc()));
+			if (h != null) {
+				checkIn.setHospede(h);
+				
+				this.manager.getTransaction().begin();
+				this.manager.merge(checkIn);
+				this.manager.getTransaction().commit();
+				
+				response.setIsSucess(Boolean.TRUE);
+				response.setMessage(request.getId() == null ? "CheckIn realizado com sucesso!" : "CheckIn atualizado com sucesso!");
+			} else {
+				response.setIsSucess(Boolean.FALSE);
+				response.setMessage("Hópede inexistente!");
+			}
 		} catch (Exception e) {
 			response.setIsSucess(Boolean.FALSE);
 			response.setMessage("Erro: " + e.getMessage());
 			this.manager.getTransaction().rollback();
 		} 
 		return response;
+	}
+	
+	private Long geHospedeByDoc(String doc) {
+		doc = doc.split(" - ")[1];
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT h.id FROM hospede h WHERE h.documento = '").append(doc).append("'");
+		
+		Query query = this.manager.createNativeQuery(sql.toString());
+		
+//		@SuppressWarnings("unchecked")
+//		List<Integer> results = ;
+//		for (Integer o : results) {
+//			return (Integer) o[0];
+//		}
+		return ((Integer) query.getSingleResult()).longValue();
 	}
 	
 	private Double getValorTotalGasto(Date dataEntrada, Date dataSaida, Boolean adicionalVeiculo) throws Exception {

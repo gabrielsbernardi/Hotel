@@ -8,7 +8,7 @@ public class CheckInRequest {
 	private Date dataEntrada;
 	private Date dataSaida;
 	private Boolean adicionalVeiculo;
-	private Long hospedeId;
+	private String hospedeDoc;
 	private Boolean somenteAbertoFilter;
 
 	public Long getId() {
@@ -43,12 +43,12 @@ public class CheckInRequest {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
 
-	public Long getHospedeId() {
-		return hospedeId;
+	public String getHospedeDoc() {
+		return hospedeDoc;
 	}
 
-	public void setHospedeId(Long hospedeId) {
-		this.hospedeId = hospedeId;
+	public void setHospedeDoc(String hospedeDoc) {
+		this.hospedeDoc = hospedeDoc;
 	}
 
 	public Boolean getSomenteAbertoFilter() {
