@@ -1,9 +1,7 @@
-D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\rest\request\HospedeFilterRequest.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\controller\CheckInController.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\model\Hospede.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\rest\service\HospedeService.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\data\ConnectionDB.java
-D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\rest\request\CheckInFilterRequest.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\controller\HospedeController.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\rest\request\CheckInRequest.java
 D:\Desenv\Workspaces\Eclipse\New\HotelService\src\main\java\br\com\hotel\ws\rest\service\CheckInService.java

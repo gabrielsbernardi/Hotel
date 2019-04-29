@@ -2,10 +2,8 @@ br\com\hotel\ws\rest\request\HospedeRequest.class
 br\com\hotel\data\ConnectionDB.class
 br\com\hotel\ws\controller\HospedeController.class
 br\com\hotel\ws\controller\HospedeController$1.class
-br\com\hotel\ws\rest\request\CheckInFilterRequest.class
 br\com\hotel\ws\controller\CheckInController.class
 br\com\hotel\utils\Utils.class
-br\com\hotel\ws\rest\request\HospedeFilterRequest.class
 br\com\hotel\ws\rest\request\CheckInRequest.class
 br\com\hotel\model\CheckIn.class
 br\com\hotel\ws\rest\response\DefaultResponse.class

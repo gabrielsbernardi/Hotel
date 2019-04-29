@@ -10,15 +10,15 @@
 		<class>br.com.hotel.model.CheckIn</class>
 		
 		<properties>
-			<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/hotel"/>
 			<property name="hibernate.connection.username" value="postgres"/>
-			<property name="hibernate.connection.password" value="gpgadmin2019"/> -->
+			<property name="hibernate.connection.password" value="gpgadmin2019"/>
 			
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-			<property name="hibernate.connection.url" value="postgres://hijwiezqaqhvqt:f09ad31022be89e03ef77b24e6fcde0cecbb35c665536d8b781ffbe1b8daea26@ec2-50-17-227-28.compute-1.amazonaws.com:5432/deeg61fcomaf7h"/>
-			<property name="hibernate.connection.username" value="hijwiezqaqhvqt"/>
-			<property name="hibernate.connection.password" value="f09ad31022be89e03ef77b24e6fcde0cecbb35c665536d8b781ffbe1b8daea26"/>
+			<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="postgres://gzuzldmaujzzyv:f2b72495a1970e69cfd1a5697b54b9cd40d72d3ca0e2609e2a2fab1cf6683485@ec2-54-83-205-27.compute-1.amazonaws.com:5432/dfe5sfvqtkqjbo"/>
+			<property name="hibernate.connection.username" value="gzuzldmaujzzyv"/>
+			<property name="hibernate.connection.password" value="f2b72495a1970e69cfd1a5697b54b9cd40d72d3ca0e2609e2a2fab1cf6683485"/> -->
 					
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
