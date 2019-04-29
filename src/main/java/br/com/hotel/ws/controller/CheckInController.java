@@ -69,7 +69,15 @@ public class CheckInController {
 		
 		return list;
 	}
-
+	
+	/**
+	 * 
+	 * Inserção e atualização de checkin
+	 * 
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	public CheckInResponse insertUpdateCheckIn(CheckInRequest request) throws Exception {
 		CheckInResponse response = new CheckInResponse();
 		try {
@@ -109,14 +117,19 @@ public class CheckInController {
 		
 		Query query = this.manager.createNativeQuery(sql.toString());
 		
-//		@SuppressWarnings("unchecked")
-//		List<Integer> results = ;
-//		for (Integer o : results) {
-//			return (Integer) o[0];
-//		}
 		return ((Integer) query.getSingleResult()).longValue();
 	}
 	
+	/**
+	 * 
+	 * Calcula o valor total gasto pelo hóspede
+	 * 
+	 * @param dataEntrada
+	 * @param dataSaida
+	 * @param adicionalVeiculo
+	 * @return
+	 * @throws Exception
+	 */
 	private Double getValorTotalGasto(Date dataEntrada, Date dataSaida, Boolean adicionalVeiculo) throws Exception {
 		Date saida = new Date();
 		if (dataSaida != null) {
@@ -137,11 +150,27 @@ public class CheckInController {
 		return Utils.duasCasasDecimais(qtdTotalApto + qtdToTalAdicionalVeiculo);
 	}
 	
+	/**
+	 * 
+	 * Calcula a quantidade de dias entre a data de entrada e saída
+	 * 
+	 * @param dataEntrada
+	 * @param dataSaida
+	 * @return
+	 */
 	private Integer qtdDias(Date dataEntrada, Date dataSaida) {
         long dt = (dataSaida.getTime() - dataEntrada.getTime()) + 3600000; // 1 hora para compensar horário de verão
 		return (int) (dt/86400000L);
 	}
 	
+	/**
+	 * 
+	 * Calcula a quantidade de dias que são finais de semana
+	 * 
+	 * @param dataEntrada
+	 * @param qtdDias
+	 * @return
+	 */
 	private Integer calcularFinaisDeSemana(Date dataEntrada, Integer qtdDias) {
 		Integer qtdFinaisDeSemana = 0;
 		Calendar calendar = Calendar.getInstance();
@@ -156,6 +185,16 @@ public class CheckInController {
 		return qtdFinaisDeSemana;
 	}
 	
+	/**
+	 * 
+	 * Calcula valor total da estadia do veículo
+	 * 
+	 * @param qtdDiasDeSemana
+	 * @param qtdFinaisDeSemana
+	 * @param dataSaida
+	 * @return
+	 * @throws Exception
+	 */
 	private Double calcularTotalVeiculo(Integer qtdDiasDeSemana, Integer qtdFinaisDeSemana, Date dataSaida) throws Exception {
 		Double qtdTotalVeiculo = (qtdDiasDeSemana * 15.00) + (qtdFinaisDeSemana * 20.00);
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -167,14 +206,16 @@ public class CheckInController {
         GregorianCalendar gcSaida = new GregorianCalendar();
         gcSaida.setTime(dataSaida);
 		
+        // Verifica se o horário de saída é maior que 16:30
+        // Se sim cobra mais uma diária pela vaga do veículo
         if (gcSaida.getTime().after(gcMaximaSemTaxa.getTime())){
         	Calendar calendar = Calendar.getInstance();
             calendar.setTime(dataSaida);
         	if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
 					|| calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-        		qtdTotalVeiculo =+ 20.00;
+        		qtdTotalVeiculo += 20.00;
         	} else {
-        		qtdTotalVeiculo =+ 15.00;
+        		qtdTotalVeiculo += 15.00;
         	}
         }
         
