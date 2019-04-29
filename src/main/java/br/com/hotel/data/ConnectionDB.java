@@ -9,7 +9,7 @@ public class ConnectionDB {
 	private static EntityManagerFactory manager;
 	
 	static {
-		manager = Persistence.createEntityManagerFactory("public");
+		manager = Persistence.createEntityManagerFactory("hotel");
 		manager.createEntityManager();		
 	}
 	
