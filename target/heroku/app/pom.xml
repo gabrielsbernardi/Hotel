@@ -131,6 +131,17 @@
 		  <artifactId>jandex</artifactId>
 		  <version>2.0.2.Final</version>
 		</dependency>
+		
+		
+		
+		
+		<!-- https://mvnrepository.com/artifact/com.github.jsimone/webapp-runner -->
+		<dependency>
+		    <groupId>com.github.jsimone</groupId>
+		    <artifactId>webapp-runner</artifactId>
+		    <version>9.0.19.1</version>
+		</dependency>
+		
 
   	</dependencies>
   	
@@ -146,6 +157,7 @@
     		<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
+			    
 			    <configuration>
 			        <source>1.8</source>
 			        <target>1.8</target>
