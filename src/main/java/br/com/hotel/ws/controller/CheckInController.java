@@ -114,8 +114,6 @@ public class CheckInController {
 	}
 	
 	private Long geHospedeByDoc(String doc) {
-		doc = doc.split(" - ")[1];
-		
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT h.id FROM hospede h WHERE h.documento = '").append(doc).append("'");
 		
