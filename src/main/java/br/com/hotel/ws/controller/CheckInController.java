@@ -40,10 +40,12 @@ public class CheckInController {
 		.add(" FROM \"checkin\" c 					 	 	 	 ")
 		.add(" INNER JOIN \"hospede\" h ON (h.id = c.hospede_id) ");
 		
-		if (request.getSomenteAbertoFilter()) {
-			sql.add(" WHERE c.data_saida IS NULL ");
-		} else {
-			sql.add(" WHERE c.data_saida IS NOT NULL ");
+		if (request.getSomenteAbertoFilter() != null) { 
+			if (request.getSomenteAbertoFilter()) {
+				sql.add(" WHERE c.data_saida IS NULL ");
+			} else {
+				sql.add(" WHERE c.data_saida IS NOT NULL ");
+			}
 		}
 		
 		sql.add(" ORDER BY c.data_entrada");
