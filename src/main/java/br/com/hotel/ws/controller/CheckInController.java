@@ -35,7 +35,8 @@ public class CheckInController {
 		.add("        h.documento,                           	 ")
 		.add("        c.data_entrada,                        	 ")
 		.add("        c.data_saida,                          	 ")
-		.add("        c.adicional_veiculo                    	 ")
+		.add("        c.adicional_veiculo,                   	 ")
+		.add("        c.id					                   	 ")
 		.add(" FROM \"checkin\" c 					 	 	 	 ")
 		.add(" INNER JOIN \"hospede\" h ON (h.id = c.hospede_id) ");
 		
@@ -63,6 +64,7 @@ public class CheckInController {
 			c.setDataSaida((Date) o[3]);
 			c.setAdicionalVeiculo((Boolean) o[4]);
 			c.setValorGasto(this.getValorTotalGasto(c.getDataEntrada(), c.getDataSaida(), c.getAdicionalVeiculo()));
+			c.setIdCheckin(((Integer) o[5]).longValue());
 			
 			list.add(c);
 		}

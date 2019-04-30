@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CheckInResponse extends DefaultResponse {
 	
+	private Long idCheckin;
 	private String nome;
 	private String documento;
 	private Date dataEntrada;
@@ -11,6 +12,14 @@ public class CheckInResponse extends DefaultResponse {
 	private Boolean adicionalVeiculo;
 	private Double valorGasto;
 	
+	public Long getIdCheckin() {
+		return idCheckin;
+	}
+
+	public void setIdCheckin(Long idCheckin) {
+		this.idCheckin = idCheckin;
+	}
+
 	public String getNome() {
 		return nome;
 	}
