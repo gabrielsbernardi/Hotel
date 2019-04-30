@@ -24,7 +24,7 @@ public class HospedeService {
 //		return hc.insertUpdateHospede(request);
 		HospedeResponse h = new HospedeResponse();
 		h.setIsSucess(true);
-		h.setMessage("FOI MANITO");
+		h.setMessage("FOI CARA");
 		return h;
 	}
 	

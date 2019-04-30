@@ -16,7 +16,7 @@
 			<property name="hibernate.connection.password" value="gpgadmin2019"/> -->
 			
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-			<property name="hibernate.connection.url" value="postgres://fexnkdqiotakow:08e3eeabd66d458aff7bde01091a3e38cdace092c1e9c974c85af1db8b054dcc@ec2-50-19-127-115.compute-1.amazonaws.com:5432/d8g0ctqq9g2bgi"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://ec2-50-19-127-115.compute-1.amazonaws.com:5432/d8g0ctqq9g2bgi?user=fexnkdqiotakow&amp;password=08e3eeabd66d458aff7bde01091a3e38cdace092c1e9c974c85af1db8b054dcc&amp;sslmode=require"/>
 			<property name="hibernate.connection.username" value="fexnkdqiotakow"/>
 			<property name="hibernate.connection.password" value="08e3eeabd66d458aff7bde01091a3e38cdace092c1e9c974c85af1db8b054dcc"/>
 					
