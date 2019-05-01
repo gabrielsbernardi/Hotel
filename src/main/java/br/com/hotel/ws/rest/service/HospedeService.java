@@ -39,6 +39,6 @@ public class HospedeService {
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<HospedeResponse> getHospedes(HospedeRequest request) throws Exception {
 		HospedeController hc = new HospedeController();
-		return hc.getHospedes(request); 
+		return hc.getHospedes(request);
 	}
 }
