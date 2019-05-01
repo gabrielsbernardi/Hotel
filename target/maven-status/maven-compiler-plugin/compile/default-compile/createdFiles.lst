@@ -11,4 +11,5 @@ br\com\hotel\ws\rest\response\HospedeResponse.class
 br\com\hotel\ws\rest\service\CheckInService.class
 br\com\hotel\ws\rest\service\HospedeService.class
 br\com\hotel\model\Hospede.class
+br\com\hotel\ws\rest\CORSFilter.class
 br\com\hotel\ws\rest\response\CheckInResponse.class
