@@ -9,7 +9,7 @@ public class CORSFilter implements ContainerResponseFilter {
 	@Override
 	public ContainerResponse filter(ContainerRequest request, ContainerResponse responseContext) {
 		
-		responseContext.getHttpHeaders().add("Access-Control-Allow-Origin", "*");
+		responseContext.getHttpHeaders().add("Access-Control-Allow-Origin", "https://hotel-bernardi-front.herokuapp.com");
 	    responseContext.getHttpHeaders().add("Access-Control-Allow-Credentials", "true");
 	    responseContext.getHttpHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
 	    responseContext.getHttpHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
